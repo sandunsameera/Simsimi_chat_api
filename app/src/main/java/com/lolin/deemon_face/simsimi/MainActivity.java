@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
         String text = editText.getText ().toString ();
 
         @Override
-        protected String doInBackground(List<ChatModel>... lists) {
+        protected String doInBackground(List<ChatModel>... params) {
             String url = String.format ("http://sandbox.api.simsimi.com/request.p?key=%s&lc=en&ft=1.0&text=%s",getString (R.string.simsimi_api),text);
             models = params[0];
             HttpDataHandler httpDataHandler = new HttpDataHandler ();
@@ -65,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override
-        protected void onPreExecute(String s) {
+        protected void onPostExecute(String s) {
+
             Gson gson = new Gson ();
             SimsimiModel response = gson.fromJson (s,SimsimiModel.class);
             ChatModel chatModel = new ChatModel (response.getResponse (),false);

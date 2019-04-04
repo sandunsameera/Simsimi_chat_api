@@ -41,12 +41,16 @@ public class CustomAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View view = convertView;
+        View view;
+        view = convertView;
 
         if (view == null ){
-            if (list_chat_model.get (position).isSend ())
+            if (list_chat_model.get (position).isSend)
                 view = layoutInflater.inflate (R.layout.list_item_message_send,null );
-            BubbleTextView text_message = view.findViewById (R.id.text_message);
+
+            else
+                view = layoutInflater.inflate (R.layout.list_item_message_recv,null);
+            BubbleTextView text_message = (BubbleTextView) view.findViewById (R.id.text_message);
             text_message.setText (list_chat_model.get(position).message);
         }
 
